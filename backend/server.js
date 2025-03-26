@@ -1,14 +1,14 @@
 const express = require('express');
+require('dotenv').config(); // Load .env file
 const colors = require('colors');
-require('dotenv').config({ path: './backend/.env' });
+const path = require('path');
 
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
-const path = require('path');
 
 // Validate environment variables
 if (!process.env.MONGO_URI) {
-  console.error('Error: MONGO_URI is missing from .env file'.red);
+  console.error('❌ Error: MONGO_URI is missing from .env file'.red);
   process.exit(1);
 }
 
@@ -41,4 +41,4 @@ if (process.env.NODE_ENV === 'production') {
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`.cyan.bold));
+app.listen(PORT, () => console.log(`✅ Server is running on port ${PORT}`.cyan.bold));
